@@ -2,20 +2,20 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
-  s.name          = "backup-aliyun"
+  s.name          = "backup-aliyun2"
   s.version       = "0.1.2"
   s.platform      = Gem::Platform::RUBY
   s.authors       = ["Jason Lee"]
   s.email         = ["huacnlee@gmail.com"]
-  s.homepage      = "https://github.com/huacnlee/backup-aliyun"
-  s.summary       = %q{Aliyun OSS Storage support for Backup}
-  s.description   = %q{Aliyun OSS Storage support for Backup}
+  s.homepage      = "https://github.com/stockcode/backup-aliyun"
+  s.summary       = %q{Aliyun OSS Storage support for new Backup}
+  s.description   = %q{Aliyun OSS Storage support for new Backup}
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
   s.license       = 'MIT'
 
-  s.add_dependency "backup", "> 4.0.0"
-  s.add_dependency "carrierwave-aliyun", ["> 0.4.0"]
+  s.add_dependency "backup", "~> 4.0.0"
+  s.add_dependency "carrierwave-aliyun", ["~> 0.4.0"]
 end
