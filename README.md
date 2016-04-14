@@ -5,7 +5,7 @@
 ## 安装
 
 ```bash
-$ gem install backup-aliyun
+$ gem install backup-aliyun2
 ```
 ## 配置
 
