@@ -23,6 +23,7 @@ Backup::Model.new(:foo, 'Description for foo') do
     aliyun.access_key_id = 'my_access_id'
     aliyun.access_key_secret = 'my_access_key'
     aliyun.bucket = 'bucket-name'
+    aliyun.area = 'cn-hangzhou'
     aliyun.path = '/path/to/my/backups'
     aliyun.keep = 10
   end

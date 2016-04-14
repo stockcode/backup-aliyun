@@ -4,8 +4,8 @@ require "base64"
 module Backup
   module Storage
     class Aliyun < Base
-      attr_accessor :bucket,:access_key_id,:access_key_secret,:aliyun_internal, :path
-      
+      attr_accessor :bucket,:access_key_id,:access_key_secret,:aliyun_internal, :area, :path
+
       def initialize(model, storage_id = nil, &block)
         super(model, storage_id)
 
@@ -13,20 +13,25 @@ module Backup
 
         instance_eval(&block) if block_given?
       end
-      
+
       private
-      
+
       def connection
         return @connection if @connection
-        opts = {
-          :aliyun_access_id => self.access_key_id,
-          :aliyun_access_key => self.access_key_secret, 
-          :aliyun_bucket => self.bucket,
-          :aliyun_internal => self.aliyun_internal || false
-        }
-        @connection = CarrierWave::Storage::Aliyun::Connection.new(opts)
+
+        CarrierWave.configure do |config|
+          config.storage = :aliyun
+          config.aliyun_access_id = self.access_key_id
+          config.aliyun_access_key = self.access_key_secret
+          config.aliyun_bucket = self.bucket
+          config.aliyun_area = self.area || "cn-hangzhou"
+          config.aliyun_internal = self.aliyun_internal || false
+        end
+
+        @uploader = CarrierWave::Uploader::Base.new
+        @connection = CarrierWave::Storage::Aliyun::Connection.new(@uploader)
       end
-      
+
       def transfer!
         remote_path = remote_path_for(@package)
 
@@ -34,12 +39,10 @@ module Backup
           src = File.join(Config.tmp_path, filename)
           dest = File.join(remote_path, filename)
           Logger.info "#{storage_name} uploading '#{ dest }'..."
-          File.open(src, 'r') do |file|
-            connection.put(dest, file)
-          end
+          connection.put(dest, File.open(src))
         end
       end
-      
+
       def remove!(package)
         remote_path = remote_path_for(package)
         Logger.info "#{storage_name} removing '#{remote_path}'..."

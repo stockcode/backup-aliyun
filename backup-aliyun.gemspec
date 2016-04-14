@@ -3,10 +3,10 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name          = "backup-aliyun2"
-  s.version       = "0.1.2"
+  s.version       = "0.1.5"
   s.platform      = Gem::Platform::RUBY
-  s.authors       = ["Jason Lee"]
-  s.email         = ["huacnlee@gmail.com"]
+  s.authors       = ["Godwin Ken"]
+  s.email         = ["gurulancer@gmail.com"]
   s.homepage      = "https://github.com/stockcode/backup-aliyun"
   s.summary       = %q{Aliyun OSS Storage support for new Backup}
   s.description   = %q{Aliyun OSS Storage support for new Backup}
