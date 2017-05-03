@@ -4,6 +4,8 @@ require "base64"
 module Backup
   module Storage
     class Aliyun < Base
+      include Storage::Cycler
+
       attr_accessor :bucket,:access_key_id,:access_key_secret,:aliyun_internal, :area, :path
 
       def initialize(model, storage_id = nil, &block)
@@ -45,6 +47,11 @@ module Backup
 
       def remove!(package)
         remote_path = remote_path_for(package)
+        @package.filenames.each do |filename|
+          dest = File.join(remote_path, filename)
+          Logger.info "#{storage_name} removing '#{ dest }'..."
+          connection.delete(dest)
+        end
         Logger.info "#{storage_name} removing '#{remote_path}'..."
         connection.delete(remote_path)
       end

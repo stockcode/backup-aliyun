@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name          = "backup-aliyun2"
-  s.version       = "0.1.5"
+  s.version       = "0.1.6"
   s.platform      = Gem::Platform::RUBY
   s.authors       = ["Godwin Ken"]
   s.email         = ["gurulancer@gmail.com"]
