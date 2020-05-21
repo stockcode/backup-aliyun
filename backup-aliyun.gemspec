@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.license       = 'MIT'
 
-  s.add_dependency "backup", "~> 4.2.0"
+  s.add_dependency "backup", "~> 5.0.0.beta.2"
   s.add_dependency "carrierwave-aliyun", ["~> 0.4.0"]
 end
